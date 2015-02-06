@@ -83,6 +83,8 @@ def Download_pdf(pdfURL, Journal):
     print "#                      Downloading PDF                         #"
     print "################################################################"
     try:
+        ###############
+        ## for Eur.Phys
         if "Eur.Phys" in str(Journal):
             pdf_url_eurphys=soup.find("meta", {"name":"citation_pdf_url"})['content'] 
             os_command_eurphys='"'+'./EurPhys-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_eurphys)+'"'
@@ -134,6 +136,19 @@ def Download_pdf(pdfURL, Journal):
             pdf_url_Physlett=Physlett_tmp1[1]
             os_command_Physlett='"'+'./Phys.Lett-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_Physlett)+'"'
             os.system('wget --quiet --user-agent="Mozilla/5.0 (Windows NT 5.2; rv:2.0.1) Gecko/20100101 Firefox/4.0.1" -O'+os_command_Physlett)
+        ###############
+        ## For New J. Phys
+        elif "New J.Phys" in str(Journal):
+            pdf_url_newj=soup.find("meta", {"name":"citation_pdf_url"})['content'] 
+            os_command_newj='"'+'./New.J.Phys-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_newj)+'"'
+            os.system('wget --quiet -O'+os_command_newj)
+        ###############
+        ## For JINST
+        elif "JINST" in str(Journal):
+            pdf_url_jinst=soup.find("meta", {"name":"citation_pdf_url"})['content'] 
+            os_command_jinst='"'+'./JINST-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_jinst)+'"'
+            os.system('wget --quiet -O'+os_command_jinst)
+
         else:
             print "THIS IS A NEW JOURNAL: ",str(Journal), ". PLEASE ACCOMODATE CODE ACCORDINLGY."
             Unknown_Journals.append(str(Journal))
@@ -145,7 +160,7 @@ def main():
     download_all_publications_list()
     Journals=Atlas_journals()
     inspirehep=Journals
-    os.system('mkdir Nucl.Phys-2014 PhysRev-2014 JHEP-2014 EurPhys-2014 Phys.Lett-2014')
+    os.system('mkdir Nucl.Phys-2014 PhysRev-2014 JHEP-2014 EurPhys-2014 Phys.Lett-2014 New.J.Phys-2014 JINST-2014')
     for inspire in inspirehep:
         download_html_INSPIRE(inspire)
     ### To test code you can select at what url placing to start since most of the first urls on atlas twiki are not published    
