@@ -100,7 +100,7 @@ def Download_pdf(pdfURL, Journal):
                 if "/pdf" in t:
                # if "/pra/pdf" in t or "/prb/pdf" in t or "/prc/pdf" in t or "/prd/pdf" in t:
                     physRev_tmp1.append(t)
-            PhysRev_url=physRev_tmp1[0]
+	    PhysRev_url=physRev_tmp1[0]
             pdf_url_PhysRev = 'http://journals.aps.org' + PhysRev_url
             os_command_PhysRev='"'+'./PhysRev-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_PhysRev)+'"'
             os.system('wget --quiet -O'+os_command_PhysRev)
@@ -133,10 +133,10 @@ def Download_pdf(pdfURL, Journal):
             for let1 in Physlett_tmp:
                 if "/www.sciencedirect.com/science/article" in let1:
                     Physlett_tmp1.append(let1)
-            pdf_url_Physlett=Physlett_tmp1[1]
+	    pdf_url_Physlett=Physlett_tmp1[1]
             os_command_Physlett='"'+'./Phys.Lett-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_Physlett)+'"'
             os.system('wget --quiet --user-agent="Mozilla/5.0 (Windows NT 5.2; rv:2.0.1) Gecko/20100101 Firefox/4.0.1" -O'+os_command_Physlett)
-        ###############
+	###############
         ## For New J. Phys
         elif "New J.Phys" in str(Journal):
             pdf_url_newj=soup.find("meta", {"name":"citation_pdf_url"})['content'] 
@@ -152,7 +152,7 @@ def Download_pdf(pdfURL, Journal):
         else:
             print "THIS IS A NEW JOURNAL: ",str(Journal), ". PLEASE ACCOMODATE CODE ACCORDINLGY."
             Unknown_Journals.append(str(Journal))
-    except (TypeError):
+    except (TypeError, IndexError):
         print "Something was wrong with link. Please check it out: ", str(pdfURL)
         Broken_links.append(str(pdfURL))
 
