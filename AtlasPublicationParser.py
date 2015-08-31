@@ -12,8 +12,8 @@ import re
 import csv
 
 YEAR=str('(2014)')
-out_file_name = "title_and_url_Atlas.txt"
-out_file = open(out_file_name, 'w')
+out_file_name = "title_and_url_Atlas"
+out_file = open(out_file_name+"_"+YEAR+".txt", 'w')
 Broken_links=[]
 Unknown_Journals=[]
 Publication_Count=[]
