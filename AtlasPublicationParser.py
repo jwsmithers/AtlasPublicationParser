@@ -11,7 +11,7 @@ import os
 import re
 import csv
 
-YEAR=str('(2014)')
+YEAR=str('(2011)')
 out_file_name = "title_and_url_Atlas"
 out_file = open(out_file_name+"_"+YEAR+".txt", 'w')
 Broken_links=[]
@@ -87,7 +87,7 @@ def Download_pdf(pdfURL, Journal):
         ## for Eur.Phys
         if "Eur.Phys" in str(Journal):
             pdf_url_eurphys=soup.find("meta", {"name":"citation_pdf_url"})['content'] 
-            os_command_eurphys='"'+'./EurPhys-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_eurphys)+'"'
+            os_command_eurphys='"'+'./EurPhys-2011/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_eurphys)+'"'
             os.system('wget --quiet -O'+os_command_eurphys)
         ###############
         ## for PhysRev
@@ -102,7 +102,7 @@ def Download_pdf(pdfURL, Journal):
                     physRev_tmp1.append(t)
 	    PhysRev_url=physRev_tmp1[0]
             pdf_url_PhysRev = 'http://journals.aps.org' + PhysRev_url
-            os_command_PhysRev='"'+'./PhysRev-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_PhysRev)+'"'
+            os_command_PhysRev='"'+'./PhysRev-2011/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_PhysRev)+'"'
             os.system('wget --quiet -O'+os_command_PhysRev)
         ###############
         ## For Elsevier/sciencedirect which is Nuclear Physics B
@@ -115,13 +115,13 @@ def Download_pdf(pdfURL, Journal):
                 if "/www.sciencedirect.com/science/article" in n:
                     nucB_tmp1.append(n)
             pdf_url_NucB=nucB_tmp1[1]
-            os_command_NucB='"'+'./Nucl.Phys-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_NucB)+'"'
+            os_command_NucB='"'+'./Nucl.Phys-2011/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_NucB)+'"'
             os.system('wget --quiet --user-agent="Mozilla/5.0 (Windows NT 5.2; rv:2.0.1) Gecko/20100101 Firefox/4.0.1" -O'+os_command_NucB)
         ###############
         ### For JHEP     
         elif "JHEP" in str(Journal):
             pdf_url_jhep=soup.find("meta", {"name":"citation_pdf_url"})['content'] 
-            os_command_jhep='"'+'./JHEP-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_jhep)+'"'
+            os_command_jhep='"'+'./JHEP-2011/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_jhep)+'"'
             os.system('wget --quiet --user-agent="Mozilla/5.0 (Windows NT 5.2; rv:2.0.1) Gecko/20100101 Firefox/4.0.1" -O'+os_command_jhep)
         ###############
         ## For Phys.Letters
@@ -134,19 +134,19 @@ def Download_pdf(pdfURL, Journal):
                 if "/www.sciencedirect.com/science/article" in let1:
                     Physlett_tmp1.append(let1)
 	    pdf_url_Physlett=Physlett_tmp1[1]
-            os_command_Physlett='"'+'./Phys.Lett-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_Physlett)+'"'
+            os_command_Physlett='"'+'./Phys.Lett-2011/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_Physlett)+'"'
             os.system('wget --quiet --user-agent="Mozilla/5.0 (Windows NT 5.2; rv:2.0.1) Gecko/20100101 Firefox/4.0.1" -O'+os_command_Physlett)
 	###############
         ## For New J. Phys
         elif "New J.Phys" in str(Journal):
             pdf_url_newj=soup.find("meta", {"name":"citation_pdf_url"})['content'] 
-            os_command_newj='"'+'./New.J.Phys-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_newj)+'"'
+            os_command_newj='"'+'./New.J.Phys-2011/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_newj)+'"'
             os.system('wget --quiet -O'+os_command_newj)
         ###############
         ## For JINST
         elif "JINST" in str(Journal):
             pdf_url_jinst=soup.find("meta", {"name":"citation_pdf_url"})['content'] 
-            os_command_jinst='"'+'./JINST-2014/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_jinst)+'"'
+            os_command_jinst='"'+'./JINST-2011/'+'"'+'"'+Journal_file+'"'+" "+ '"'+str(pdf_url_jinst)+'"'
             os.system('wget --quiet -O'+os_command_jinst)
 
         else:
@@ -160,7 +160,7 @@ def main():
     download_all_publications_list()
     Journals=Atlas_journals()
     inspirehep=Journals
-    os.system('mkdir Nucl.Phys-2014 PhysRev-2014 JHEP-2014 EurPhys-2014 Phys.Lett-2014 New.J.Phys-2014 JINST-2014')
+    os.system('mkdir Nucl.Phys-2011 PhysRev-2011 JHEP-2011 EurPhys-2011 Phys.Lett-2011 New.J.Phys-2011 JINST-2011')
     for inspire in inspirehep:
         download_html_INSPIRE(inspire)
     ### To test code you can select at what url placing to start since most of the first urls on atlas twiki are not published    
